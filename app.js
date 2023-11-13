@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const db = require("./config/db");
 const User = require("./models/User");
-const allRoutes = require("./routes")
+const Todo = require("./models/Todo");
+const allRoutes = require("./routes");
 
 const PORT = process.env.PORT || 4000;
 
@@ -12,7 +13,9 @@ async function testCon() {
       console.log("Connection has been established successfully.");
   
     //   await db.sync({force: true})
-      await User.sync({force: true})
+    //   await User.sync({force: true})
+      await Todo.sync({force: true})
+
       console.log("All models were synchronized successfully.");
   
     } catch (error) {

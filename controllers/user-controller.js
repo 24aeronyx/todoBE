@@ -14,6 +14,9 @@ module.exports = {
         let data = req.body
 
         try{
+            const hashPassword = bcrypt.hashSync(data.password, 10)
+            data.password = hashPassword
+
             await User.create(data)
 
             res.status(201).json({
