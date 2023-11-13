@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../config/db");
+const User = require("./User");
 
 const Todo = sequelize.define(
   "todo",

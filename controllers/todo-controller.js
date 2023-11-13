@@ -1,14 +1,38 @@
-const bcrypt = require('bcrypt')
 const Todo = require('../models/Todo')
 
 module.exports = {
-    getAllTodo : (req, res) => {
-        let data = req.body
+    getAllTodo : async (req, res) => {
+        const todos = await Todo.findAll()
+        
+        res.json({
+            message: "Berhasil mendapatkann todo",
+            data: todos
+        })
     },
 
-    getTodoById : (req, res) => {
-
-    },
+    getTodoById: async (req, res) => {
+        try {
+          const todoId = req.params.id;
+      
+          const todo = await Todo.findByPk(todoId);
+      
+          if (!todo) {
+            return res.status(404).json({
+              message: "Todo not found",
+            });
+          }
+      
+          res.json({
+            message: "Berhasil mendapatkan todo by id",
+            data: todo,
+          });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({
+            message: "Internal Server Error",
+          });
+        }
+      },
 
     addTodo : async (req, res) => {
         let data = req.body
@@ -17,11 +41,11 @@ module.exports = {
             await Todo.create(data)
 
             res.status(201).json({
-                message: 'Berhasil menambahkan user'
+                message: 'Berhasil menambahkan todo'
             })
         } catch(error) {
             res.json({
-                message: 'Gagal menambahkan user',
+                message: 'Gagal menambahkan todo',
                 error: error.message
             })
         }

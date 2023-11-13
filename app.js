@@ -14,7 +14,7 @@ async function testCon() {
   
     //   await db.sync({force: true})
     //   await User.sync({force: true})
-      await Todo.sync({force: true})
+    //   await Todo.sync({force: true})
 
       console.log("All models were synchronized successfully.");
   
