@@ -1,8 +1,6 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../config/db");
 
-class User extends Model {}
-
 const User = sequelize.define(
   "user",
   {
@@ -29,8 +27,10 @@ const User = sequelize.define(
   },
   {
     freezeTableName: true,
+    timestamps: true
   }
 );
 
-// the defined model is the class itself
-console.log(User === sequelize.models.User); // true
+module.exports = User
+
+
